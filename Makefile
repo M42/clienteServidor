@@ -1,8 +1,8 @@
 
-all: Cliente.class Servidor.class
+all: YodafyClienteTCP.class YodafyServidorIterativo.class
 
-Cliente.class: YodafyClienteTCP.java
+YodafyClienteTCP.class: YodafyClienteTCP.java
 	javac $^
 
-Servidor.class: ProcesadorYodafy.java YodafyServidorIterativo.java
+YodafyServidorIterativo.class: YodafyServidorIterativo.java ProcesadorYodafy.java
 	javac $^
