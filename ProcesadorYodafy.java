@@ -48,9 +48,7 @@ public class ProcesadorYodafy {
             outputStream=socketServicio.getOutputStream();
             
             // Lee la frase a Yodaficar:
-            ////////////////////////////////////////////////////////
-            // read ... datosRecibidos.. (Completar)
-            ////////////////////////////////////////////////////////
+	    bytesRecibidos = inputStream.read(datosRecibidos);
             
             // Yoda hace su magia:
             // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
@@ -61,12 +59,7 @@ public class ProcesadorYodafy {
             datosEnviar=respuesta.getBytes();
             
             // Enviamos la traducción de Yoda:
-            ////////////////////////////////////////////////////////
-            // ... write ... datosEnviar... datosEnviar.length ... (Completar)
-            ////////////////////////////////////////////////////////
-            
-            
-            
+	    outputStream.write(datosEnviar,0,datosEnviar.length);
         } catch (IOException e) {
             System.err.println("Error al obtener los flujso de entrada/salida.");
         }
