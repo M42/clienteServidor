@@ -61,7 +61,7 @@ public class ProcesadorYodafy {
             // Enviamos la traducción de Yoda:
 	    outputStream.write(datosEnviar,0,datosEnviar.length);
         } catch (IOException e) {
-            System.err.println("Error al obtener los flujso de entrada/salida.");
+            System.err.println("Error al obtener los flujos de entrada/salida.");
         }
 
     }
