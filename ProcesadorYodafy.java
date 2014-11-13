@@ -33,7 +33,7 @@ public class ProcesadorYodafy {
     
     // Aquí es donde se realiza el procesamiento realmente:
     void procesa(){
-        
+
         // Como máximo leeremos un bloque de 1024 bytes. Esto se puede modificar.
         byte [] datosRecibidos=new byte[1024];
         int bytesRecibidos=0;
@@ -92,7 +92,7 @@ public class ProcesadorYodafy {
         for(int i=1;i<s.length;i++){
           resultado+=" "+s[i];
       }
-      
+
       return resultado;
   }
 }
