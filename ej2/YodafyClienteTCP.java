@@ -33,7 +33,7 @@ public class YodafyClienteTCP {
 	    BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
 
 	    // Enviamos el string por el outputStream
-	    outPrinter.println("Al monte del volcán debes ir sin demora");
+	    outPrinter.println("Al monte del volcán debes ir sin demora");	String buferEnvio;
 			
 	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
 	    // los enviará efectivamente cuando considere que tiene suficientes datos que enviar...
@@ -41,10 +41,9 @@ public class YodafyClienteTCP {
 	    outPrinter.flush();
 
 	    // Mostremos la cadena de caracteres recibidos:
+	    buferRecepcion = inReader.readLine();
 	    System.out.println("Recibido: ");
-	    while ((buferRecepcion = inReader.readLine()) != null) {
-		System.out.print(buferRecepcion);
-	    }
+	    System.out.print(buferRecepcion);
 			
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
 	    // el inputStream  y el outputStream)
