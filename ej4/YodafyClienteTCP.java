@@ -10,6 +10,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.net.DatagramSocket;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
 
 public class YodafyClienteTCP {
 
@@ -18,36 +21,34 @@ public class YodafyClienteTCP {
 	byte[] buferRecepcion=new byte[256];
 	int bytesLeidos=0;
 		
-	// Nombre del host donde se ejecuta el servidor:
+	// Nombre y puerto del host donde se ejecuta el servidor:
 	String host="localhost";
-	// Puerto en el que espera el servidor:
 	int port=8989;
 		
-	// Socket para la conexión TCP
-	Socket socketServicio=null;
-		
+	// Socket para la conexión UDP
+	InetAddress direccion;
+	DatagramSocket socket;
+	DatagramPacket paquete;
+
 	try {
 	    // Creamos un socket que se conecte a "host" y "port".
-	    socketServicio = new Socket(host, port);
-			
-	    InputStream inputStream = socketServicio.getInputStream();
-	    OutputStream outputStream = socketServicio.getOutputStream();
+	    socket = new DatagramSocket();
+	    direccion = InetAddress.getByName(host);
+
 			
 	    // Si queremos enviar una cadena de caracteres por un OutputStream, hay que pasarla primero
 	    // a un array de bytes:
 	    buferEnvio="Al monte del volcán debes ir sin demora".getBytes();
 			
-	    // Enviamos el array por el outputStream
-	    outputStream.write(buferEnvio,0,buferEnvio.length);
-			
-	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
-	    // los enviará efectivamente cuando considere que tiene suficientes datos que enviar...
-	    // Podemos usar "flush()" para obligar a TCP a que no espere para hacer el envío:
-	    outputStream.flush();
+	    // Enviamos el array por UDP
+	    paquete = new DatagramPacket(buferEnvio, buferEnvio.length, direccion, port);
+	    socket.send(paquete);
 			
 	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
 	    // rellenar. El método "read(...)" devolverá el número de bytes leídos.
-	    bytesLeidos = inputStream.read(buferRecepcion);
+	    paquete = new DatagramPacket(buferRecepcion, buferRecepcion.length);
+	    socket.receive(paquete);
+	    //paquete.getData();  ?????????
 
 	    // Mostremos la cadena de caracteres recibidos:
 	    System.out.println("Recibido: ");
@@ -57,7 +58,7 @@ public class YodafyClienteTCP {
 			
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
 	    // el inputStream  y el outputStream)
-	    socketServicio.close();
+	    socket.close();
 	    
 	    // Excepciones:
 	} catch (UnknownHostException e) {
