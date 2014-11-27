@@ -15,7 +15,7 @@ public class YodafyClienteTCP {
 
     public static void main(String[] args) {	
 	byte[] buferEnvio;
-	byte[] buferRecepcion=new byte[256];
+	String buferRecepcion;
 	int bytesLeidos=0;
 		
 	// Nombre del host donde se ejecuta el servidor:
@@ -31,7 +31,7 @@ public class YodafyClienteTCP {
 	    socketServicio = new Socket(host, port);
 	    
 	    PrintWriter outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
-	    BufferedReader inReader = new BufferedReader(new InputStream(socketServicio.getInputStream()));
+	    BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
 
 	    // Si queremos enviar una cadena de caracteres por un OutputStream, hay que pasarla primero
 	    // a un array de bytes:
@@ -43,17 +43,15 @@ public class YodafyClienteTCP {
 	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
 	    // los enviará efectivamente cuando considere que tiene suficientes datos que enviar...
 	    // Podemos usar "flush()" para obligar a TCP a que no espere para hacer el envío:
-	    outputStream.flush();
+	    outPrinter.flush();
 			
 	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
 	    // rellenar. El método "read(...)" devolverá el número de bytes leídos.
-	    bytesLeidos = inReader.readLine(buferRecepcion);
+	    buferRecepcion = inReader.readLine();
 
 	    // Mostremos la cadena de caracteres recibidos:
 	    System.out.println("Recibido: ");
-	    for(int i=0;i<bytesLeidos;i++){
-		System.out.print((char)buferRecepcion[i]);
-	    }
+	    System.out.print(buferRecepcion);
 			
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
 	    // el inputStream  y el outputStream)
