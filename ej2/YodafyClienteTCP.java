@@ -13,8 +13,7 @@ import java.net.UnknownHostException;
 
 public class YodafyClienteTCP { 
 
-    public static void main(String[] args) {	
-	String buferEnvio;
+    public static void main(String[] args) {
 	String buferRecepcion;
 	int bytesLeidos=0;
 		
@@ -33,20 +32,13 @@ public class YodafyClienteTCP {
 	    PrintWriter outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 	    BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
 
-	    // Si queremos enviar una cadena de caracteres por un OutputStream, hay que pasarla primero
-	    // a un array de bytes:
-	    buferEnvio="Al monte del volcán debes ir sin demora";
-			
-	    // Enviamos el array por el outputStream
-	    outPrinter.println(buferEnvio);
+	    // Enviamos el string por el outputStream
+	    outPrinter.println("Al monte del volcán debes ir sin demora");
 			
 	    // Aunque le indiquemos a TCP que queremos enviar varios arrays de bytes, sólo
 	    // los enviará efectivamente cuando considere que tiene suficientes datos que enviar...
 	    // Podemos usar "flush()" para obligar a TCP a que no espere para hacer el envío:
 	    outPrinter.flush();
-			
-	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
-	    // rellenar. El método "read(...)" devolverá el número de bytes leídos.
 
 	    // Mostremos la cadena de caracteres recibidos:
 	    System.out.println("Recibido: ");
