@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 public class YodafyClienteTCP { 
 
     public static void main(String[] args) {	
-	byte[] buferEnvio;
+	String buferEnvio;
 	String buferRecepcion;
 	int bytesLeidos=0;
 		
@@ -35,7 +35,7 @@ public class YodafyClienteTCP {
 
 	    // Si queremos enviar una cadena de caracteres por un OutputStream, hay que pasarla primero
 	    // a un array de bytes:
-	    buferEnvio="Al monte del volcán debes ir sin demora".getBytes();
+	    buferEnvio="Al monte del volcán debes ir sin demora";
 			
 	    // Enviamos el array por el outputStream
 	    outPrinter.println(buferEnvio);
