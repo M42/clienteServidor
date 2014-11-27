@@ -23,7 +23,8 @@ public class YodafyClienteTCP {
 		
 	// Nombre y puerto del host donde se ejecuta el servidor:
 	String host="localhost";
-	int port=8989;
+	int my_port=8989;
+	int port=8888;
 		
 	// Socket para la conexión UDP
 	InetAddress direccion;
@@ -32,7 +33,7 @@ public class YodafyClienteTCP {
 
 	try {
 	    // Creamos un socket que se conecte a "host" y "port".
-	    socket = new DatagramSocket();
+	    socket = new DatagramSocket(my_port);
 	    direccion = InetAddress.getByName(host);
 
 			

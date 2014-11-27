@@ -14,7 +14,7 @@ public class YodafyServidorIterativo {
     public static void main(String[] args) {
     
         // Puerto de escucha
-        int port=8989;
+        int port=8888;
         // array de bytes auxiliar para recibir o enviar datos.
         byte []buffer=new byte[256];
         // Número de bytes leídos
@@ -35,7 +35,7 @@ public class YodafyServidorIterativo {
                 ProcesadorYodafy procesador=new ProcesadorYodafy(socketServer);
                 procesador.procesa();
 
-                socketServer.close();
+                //socketServer.close();
                 
             } while (true);
             
