@@ -44,7 +44,7 @@ public class YodafyServidorIterativo {
 
 }
 
-private class HebraServidor extends Thread {
+class HebraServidor extends Thread {
     private Socket socketServicio;
 
     HebraServidor(Socket socketServicio) {
