@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
+import java.net.DatagramSocket;
 import java.net.Socket;
 
 //
@@ -19,11 +20,11 @@ public class YodafyServidorIterativo {
         // Número de bytes leídos
         int bytesLeidos=0;
         // Socket para el servidor
-        ServerSocket socketServer;
+        DatagramSocket socketServer;
         Socket socketServicio = null;
         
         try {
-            socketServer = new ServerSocket(port);
+            socketServer = new DatagramSocket(port);
             
             // Mientras ... siempre!
             do {
@@ -38,6 +39,8 @@ public class YodafyServidorIterativo {
                 // Este esquema permite que se puedan usar hebras más fácilmente.
                 ProcesadorYodafy procesador=new ProcesadorYodafy(socketServicio);
                 procesador.procesa();
+
+                socketServer.close();
                 
             } while (true);
             
