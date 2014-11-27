@@ -1,8 +1,8 @@
 
-all: YodafyClienteTCP.class YodafyServidorIterativo.class
+all: YodafyClienteTCP.class YodafyServidorConcurrente.class
 
 YodafyClienteTCP.class: YodafyClienteTCP.java
 	javac $^
 
-YodafyServidorIterativo.class: YodafyServidorIterativo.java ProcesadorYodafy.java
+YodafyServidorConcurrente.class: YodafyServidorConcurrente.java ProcesadorYodafy.java
 	javac $^
