@@ -47,11 +47,12 @@ public class YodafyClienteTCP {
 			
 	    // Leemos la respuesta del servidor. Para ello le pasamos un array de bytes, que intentará
 	    // rellenar. El método "read(...)" devolverá el número de bytes leídos.
-	    buferRecepcion = inReader.readLine();
 
 	    // Mostremos la cadena de caracteres recibidos:
 	    System.out.println("Recibido: ");
-	    System.out.print(buferRecepcion);
+	    while ((buferRecepcion = inReader.readLine()) != null) {
+		System.out.print(buferRecepcion);
+	    }
 			
 	    // Una vez terminado el servicio, cerramos el socket (automáticamente se cierran
 	    // el inputStream  y el outputStream)
