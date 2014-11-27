@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Random;
+import java.net.DatagramSocket;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
 
 //
 // Nota: si esta clase extendiera la clase Thread, y el procesamiento lo hiciera el método "run()",
@@ -14,7 +17,7 @@ import java.util.Random;
 //
 public class ProcesadorYodafy {
     // Referencia a un socket para enviar/recibir las peticiones/respuestas
-    private Socket socketServicio;
+    private DatagramSocket socketUDP;
     // stream de lectura (por aquí se recibe lo que envía el cliente)
     private InputStream inputStream;
     // stream de escritura (por aquí se envía los datos al cliente)
@@ -24,8 +27,8 @@ public class ProcesadorYodafy {
     private Random random;
     
     // Constructor que tiene como parámetro una referencia al socket abierto en por otra clase
-    public ProcesadorYodafy(Socket socketServicio) {
-        this.socketServicio=socketServicio;
+    public ProcesadorYodafy(DatagramSocket socketUDP) {
+        this.socketUDP = socketUDP;
         random=new Random();
     }
     
@@ -43,11 +46,11 @@ public class ProcesadorYodafy {
         
         try {
             // Obtiene los flujos de escritura/lectura
-            inputStream=socketServicio.getInputStream();
-            outputStream=socketServicio.getOutputStream();
-            
+            DatagramPacket paquete = new DatagramPacket(datosRecibidos, datosRecibidos.length);
+            socketUDP.receive(paquete);
+
             // Lee la frase a Yodaficar:
-	    bytesRecibidos = inputStream.read(datosRecibidos);
+            //bytesRecibidos = paquete.getData();
             
             // Yoda hace su magia:
             // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
@@ -58,7 +61,8 @@ public class ProcesadorYodafy {
             datosEnviar=respuesta.getBytes();
             
             // Enviamos la traducción de Yoda:
-	    outputStream.write(datosEnviar,0,datosEnviar.length);
+            DatagramPacket paqueteEnviar = new DatagramPacket(datosEnviar, datosEnviar.length, paquete.getAddress(), paquete.getPort());
+            socketUDP.send(paqueteEnviar);
         } catch (IOException e) {
             System.err.println("Error al obtener los flujos de entrada/salida.");
         }

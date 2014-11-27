@@ -28,16 +28,11 @@ public class YodafyServidorIterativo {
             
             // Mientras ... siempre!
             do {
-                try {
-                    socketServicio = socketServer.accept();
-                } catch (IOException e) {
-                    System.out.println("Error: no se pudo aceptar la conexión solicitada.");
-                }
                 
                 // Creamos un objeto de la clase ProcesadorYodafy, pasándole como 
                 // argumento el nuevo socket, para que realice el procesamiento
                 // Este esquema permite que se puedan usar hebras más fácilmente.
-                ProcesadorYodafy procesador=new ProcesadorYodafy(socketServicio);
+                ProcesadorYodafy procesador=new ProcesadorYodafy(socketServer);
                 procesador.procesa();
 
                 socketServer.close();
