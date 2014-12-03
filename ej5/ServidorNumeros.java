@@ -69,12 +69,7 @@ class HebraServidor extends Thread {
 	    }
 
 	    // Envía la respuesta del servidor
-	    switch (resultado) {
-	    case 0:  outPrinter.println("¡Acierto!");
-	    case 1:  outPrinter.println("El número es mayor");
-	    case -1: outPrinter.println("El número es menor");
-	    }
-
+	    outPrinter.println(resultado);
 	    finalizado = (resultado == 0);
 
 	    // Intenta adivinar al cliente
