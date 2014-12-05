@@ -12,7 +12,7 @@ public class YodafyServidorConcurrente {
 
     public static void main(String[] args) {
         // Puerto de escucha
-        int port=8989;
+        int port = 8989;
         
         // Socket para el servidor
         ServerSocket socketServer;
