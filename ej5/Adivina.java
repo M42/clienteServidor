@@ -6,20 +6,21 @@ import java.util.Random;
 
 public class Adivina {
     private Random rand = new Random();
-    private int pensado = rand.nextInt(100);
+    private int pensado = rand.nextInt(Protocol.MAXINT);
 
     public Adivina() {
+	System.out.println("El servidor ha elegido el: " + pensado);
     }
 
     public int intento(int n) {
 	if (n == pensado)
-	    return 0;
-	else if (n <= pensado)
-	    return -1;
-	return 1;
+	    return Protocol.ACIERTO;
+	else if (n < pensado)
+	    return Protocol.ESMENOR;
+	return Protocol.ESMAYOR;
     }
 
     public int estima() {
-	return rand.nextInt(100);
+	return rand.nextInt(Protocol.MAXINT);
     }
 }
