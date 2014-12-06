@@ -62,7 +62,10 @@ class HebraServidor extends Thread {
 
 	    try {
 		int datoRecibido = Integer.parseInt(inReader.readLine());
+		System.out.println("El servidor ha recibido un intento del cliente: " + datoRecibido);
 		resultado = adivinador.intento(datoRecibido);
+		if (resultado == 0)
+		    System.out.println("El cliente ha acertado.");
 	    }
 	    catch (IOException e) {
 		System.err.println("Error al leer los flujos.");
@@ -74,7 +77,25 @@ class HebraServidor extends Thread {
 
 	    // Intenta adivinar al cliente
 	    if (!finalizado) {
-		outPrinter.println(adivinador.estima());
+		int estimacion = adivinador.estima();
+		System.out.println("El servidor estima el número: " + estimacion);
+		outPrinter.println(estimacion);
+
+		// Lee respuesta del cliente
+		try {
+		    int respuesta = Integer.parseInt(inReader.readLine());
+
+		    switch (respuesta) {
+		    case Protocol.ACIERTO: System.out.println("Acierto del servidor"); break;
+		    case Protocol.ESMAYOR: System.out.println("Error del servidor"); break;
+		    case Protocol.ESMENOR: System.out.println("Error del servidor"); break;
+		    }
+
+		    finalizado = (respuesta == Protocol.ACIERTO);
+		}
+		catch (IOException e) {
+		    System.err.println("Error al leer los flujos.");
+		}
 	    }
 	}
     }
