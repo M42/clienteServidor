@@ -13,10 +13,10 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class ClienteNumeros {
-    private int port = 8989;
-    private String host = "localhost";
-    private PrintWriter outPrinter;
-    private BufferedReader inReader;
+    private static int port = 8989;
+    private static String host = "localhost";
+    private static PrintWriter outPrinter;
+    private static BufferedReader inReader;
     
     public static void main(String[] args) {
 	try {
@@ -39,7 +39,7 @@ public class ClienteNumeros {
 	}
     }
 
-    public void jugar() {
+    public static void jugar() {
 	Boolean finalizado = false;
 
 	// Pide número al jugador
@@ -47,35 +47,44 @@ public class ClienteNumeros {
 	System.out.println("Escribe tu número: ");
 	int num = in.nextInt();
 	
-	while (!finalizado) {
-	    // Lee intento del cliente
-	    System.out.println("Adivina al servidor: ");
-	    int n = in.nextInt();
-	    outPrinter.println(n);
+	try {
+	    while (!finalizado) {	    
+		// Escribe intento del cliente
+		System.out.println("Adivina al servidor: ");
+		int n = in.nextInt();
+		outPrinter.println(n);
 
-	    // Lee respuesta del servidor
-	    int respuesta = Integer.parseInt(inReader.readLine());
-	    switch (respuesta) {
-	    case 0:  System.out.println("¡Acierto!");
-	    case 1:  System.out.println("El número es mayor");
-	    case -1: System.out.println("El número es menor");
+		// Lee respuesta del servidor
+		int respuesta = Integer.parseInt(inReader.readLine());
+		switch (respuesta) {
+		case Protocol.ACIERTO: System.out.println("¡Acierto!"); break;
+		case Protocol.ESMAYOR: System.out.println("El número es mayor"); break;
+		case Protocol.ESMENOR: System.out.println("El número es menor"); break;
+		}
+
+		finalizado = (respuesta == Protocol.ACIERTO);
+
+		if (!finalizado) {
+		    // Lee predicción del servidor
+		    int prediccion = Integer.parseInt(inReader.readLine());
+		    System.out.println("El servidor ha hecho la predicción: " + prediccion);
+		    int resultado = Protocol.ACIERTO;
+		    if (prediccion > num)
+			resultado = Protocol.ESMAYOR;
+		    if (prediccion < num)
+			resultado = Protocol.ESMENOR;
+
+		    // Envía respuesta
+		    outPrinter.println(resultado);
+		    if (resultado == Protocol.ACIERTO) {
+			System.out.println("El servidor ha acertado el número");
+			finalizado = true;
+		    }
+		}
 	    }
-
-	    finalizado = (respuesta == 0);
-
-	    if (!finalizado) {
-		// Lee predicción del servidor
-		int prediccion = Integer.parseInt(inReader.readLine());
-		int resultado = 0;
-		if (prediccion >= num)
-		    resultado = 1;
-		if (prediccion <= num)
-		    resultado = -1;
-
-		// Envía respuesta
-		outPrinter.println(resultado);
-		finalizado = (respuesta == 0);
-	    }
+	}
+	catch (IOException e) {
+	    System.err.println("Error de lectura del cliente");
 	}
     }
 }
