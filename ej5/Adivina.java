@@ -16,8 +16,8 @@ public class Adivina {
 	if (n == pensado)
 	    return Protocol.ACIERTO;
 	else if (n < pensado)
-	    return Protocol.ESMENOR;
-	return Protocol.ESMAYOR;
+	    return Protocol.ESMAYOR;
+	return Protocol.ESMENOR;
     }
 
     public int estima() {
