@@ -1,3 +1,14 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 4
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

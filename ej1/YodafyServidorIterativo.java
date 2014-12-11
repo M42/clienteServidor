@@ -1,3 +1,13 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 1
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,7 +35,6 @@ public class YodafyServidorIterativo {
         try {
             socketServer = new ServerSocket(port);
             
-            // Mientras ... siempre!
             do {
                 try {
                     socketServicio = socketServer.accept();

@@ -1,3 +1,14 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 5
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
+
 public class Protocol {
     static final int MAXINT = 10;
     static final int ACIERTO = 0;

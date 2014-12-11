@@ -1,3 +1,14 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 2
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
+
 //
 // YodafyServidorIterativo
 // (CC) jjramos, 2012

@@ -1,3 +1,14 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 4
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
+
 //
 // YodafyServidorIterativo
 // (CC) jjramos, 2012
@@ -49,7 +60,6 @@ public class ProcesadorYodafy {
             DatagramPacket paquete = new DatagramPacket(datosRecibidos, datosRecibidos.length);
             socketUDP.receive(paquete);
             
-            // Yoda hace su magia:
             // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
             String peticion = new String(datosRecibidos, 0, paquete.getLength());
             // Yoda reinterpreta el mensaje:

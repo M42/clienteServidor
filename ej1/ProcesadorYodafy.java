@@ -1,3 +1,15 @@
+/*********************************************
+
+    Fundamentos de Redes
+    Práctica 2
+    Ejercicio 1
+
+    Mario Román
+    Francisco David Charte
+
+*********************************************/
+
+
 //
 // YodafyServidorIterativo
 // (CC) jjramos, 2012
@@ -8,10 +20,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Random;
 
-//
-// Nota: si esta clase extendiera la clase Thread, y el procesamiento lo hiciera el método "run()",
-// ¡Podríamos realizar un procesado concurrente! 
-//
 public class ProcesadorYodafy {
     // Referencia a un socket para enviar/recibir las peticiones/respuestas
     private Socket socketServicio;
@@ -47,9 +55,8 @@ public class ProcesadorYodafy {
             outputStream=socketServicio.getOutputStream();
             
             // Lee la frase a Yodaficar:
-	    bytesRecibidos = inputStream.read(datosRecibidos);
+            bytesRecibidos = inputStream.read(datosRecibidos);
             
-            // Yoda hace su magia:
             // Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
             String peticion=new String(datosRecibidos,0,bytesRecibidos);
             // Yoda reinterpreta el mensaje:
